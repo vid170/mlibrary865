@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.radiobuttons{
+  width: 100%;
+  padding: 12px 2px;
+  margin: 8px 0;
+  display: inline-block;
+ box-sizing: border-box;
+ 
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: rgb(255, 255, 255);
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 32px;
+  right: 8px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: rgb(42, 136, 19) transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent rgb(12, 167, 107) transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #070606;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: rgb(30, 255, 41);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dropbtn {
+  background-color: #f7f7f7;
+  color: white;
+  padding: 11px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+</head>
+<body>
+
+<h2>Signup Form</h2>
+
+<form action="signup" method="post">
+  <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    {% with errors = get_flashed_messages(category_filter=["message_sent"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span style="background-color:#f8d7da; color:rgb(223, 53, 53); width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;">{{ message }}<br></span>
+                
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% with errors = get_flashed_messages(category_filter=["error_userexists"]) %}
+{% if errors %}
+    {%- for message in errors %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span style="background-color:#f8d7da; color:rgb(223, 53, 53); width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;">{{ message }}<br></span>
+            
+        </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="USERNAME" required>
+
+  
+   
+
+    
+      <label for="EMAIL"><b>Email</b></label>
+      <input type="text" placeholder="Enter email" name="EMAIL" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" title="Must be a valid email address"  required >
+    <!-- <label for="USERTYPE"><b>Usertype</b></label>
+    <input type="text" placeholder="Enter usertype "name="USERTYPE" required> -->
+
+   
+    <label for="PASSWORD"><b>Password</b></label>
+    <input type="text" placeholder="Enter password" name="PASSWORD" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+
+      <label class="USERTYPE"><b>Usertype</b></label>
+    
+  <div class=radiobuttons>
+      <input type="radio"  name="USERTYPE" id="student" value="student">
+    <label for ="student">Student</label>
+      
+ 
+   <input type="radio"  name="USERTYPE" id="admin" value="admin">
+   <label for ="admin">Admin</label></div>
+    
+
+
+      <!-- <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+      <label for="vehicle1"> I have a bike</label><br>
+      <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+      <label for="vehicle2"> I have a car</label><br>
+      -->
+    
+    
+    <button type="submit">Signup</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  
+</form>
+
+</body>
+</html>

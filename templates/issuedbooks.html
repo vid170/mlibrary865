@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #2804aa;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width:100%" border="3">
+        <tr>
+            
+            <th>ID No.</th>
+            <th>Book</th>
+            <th> Author</th>
+            <th>Issued By</th>
+            <th>Issuer's Email ID</th>
+            <th>Issue Date</th>
+            <th>Due Date</th>
+        </tr>
+        
+        {% for i in issuedbook %}
+        <tr>
+            
+            <td>{{i}}</td>
+            <td>{{issuedbook[i]['name']}}</td>
+            <td>{{issuedbook[i]['author']}}</td>
+            <td>{{issuedbook[i]['issuedby']['username']}}</td>
+            <td>{{issuedbook[i]['issuedby']['email']}}</td>
+            <td>{{issuedbook[i]['issuedate']}}</td>
+            <td>{{issuedbook[i]['returndate']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
