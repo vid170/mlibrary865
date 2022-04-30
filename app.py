@@ -29,7 +29,7 @@ mail = Mail(app)
 email=None
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('/index.html')
 user={}
 
 
@@ -77,7 +77,7 @@ def signup():
         print(otp)
         print(email)
         msg = Message('Your unique verification code', sender =   'mlibrary865gmail.com', recipients = [email])
-        msg.body = "This is your emailConfirm your otp"+str(otp)
+        msg.body = "Please confirm your otp. This is your unique verification code: "+str(otp)
         mail.send(msg)
         flash('message sent',"message_sent")
         
